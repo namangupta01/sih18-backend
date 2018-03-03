@@ -1,3 +1,3 @@
 class UserSessionToken < ApplicationRecord
-	beongs_to :user
+	belongs_to :user
 end

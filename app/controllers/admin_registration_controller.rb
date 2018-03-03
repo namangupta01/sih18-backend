@@ -3,7 +3,7 @@ class AdminRegistrationController < ApplicationController
 		admin = Admin.where(email: params[:email]).first
 		if admin
 			if admin.password = params[:password]
-				session_token = secure_token
+				session_token = admin_secure_session_token
 				data = Hash.new
 				data[:user] = user
 				data[:token] = session_token
