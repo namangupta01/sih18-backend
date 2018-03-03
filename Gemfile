@@ -36,6 +36,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'active_model_serializers', '0.9.3'
 gem 'activeadmin'
 gem 'devise'
+gem "active_material", github: "vigetlabs/active_material"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
