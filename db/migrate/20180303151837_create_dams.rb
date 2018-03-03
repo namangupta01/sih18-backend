@@ -21,6 +21,7 @@ class CreateDams < ActiveRecord::Migration[5.1]
     	t.string :purpose
     	t.string :designed_spillway_capacity
     	t.string :state
+    	t.string :present_water_level
       	t.timestamps
     end
   end
