@@ -48,12 +48,17 @@ class ApplicationController < ActionController::Base
 	end
 
 	def authenticate_user!
+		byebug
 		user_session_token = params[:session_token]
 		if UserSessionToken.where(session_token: user_session_token).any?
 			return true
 		else
 			return response_data({}, "Unauthticated! Please, Login Again", 401)
 		end
+	end
+
+	def current_user
+		UserSessionToken.where(session_token: params[:session_token]).first.user
 	end
 
 end

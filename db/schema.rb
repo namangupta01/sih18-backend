@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180303162519) do
+ActiveRecord::Schema.define(version: 20180308153051) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -94,6 +94,31 @@ ActiveRecord::Schema.define(version: 20180303162519) do
     t.string "dam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "help_mes", force: :cascade do |t|
+    t.string "latitude"
+    t.string "longitude"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_help_mes_on_user_id"
+  end
+
+  create_table "user_alert_mappings", force: :cascade do |t|
+    t.integer "help"
+    t.integer "helper"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_locations", force: :cascade do |t|
+    t.string "latitude"
+    t.string "longitude"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_locations_on_user_id"
   end
 
   create_table "user_session_tokens", force: :cascade do |t|

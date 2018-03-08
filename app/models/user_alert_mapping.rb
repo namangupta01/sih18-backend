@@ -1,0 +1,2 @@
+class UserAlertMapping < ApplicationRecord
+end

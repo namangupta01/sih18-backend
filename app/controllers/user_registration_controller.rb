@@ -23,7 +23,7 @@ class UserRegistrationController < ApplicationController
 			if  user.confirmed
 				if user.password == params[:password]
 					user_session_token = user.user_session_tokens.new
-					user_session_token.session_token = secure_session_token
+					user_session_token.session_token = user_secure_session_token
 					user_session_token.save!
 					data = Hash.new
 					data[:token] = user_session_token.session_token
