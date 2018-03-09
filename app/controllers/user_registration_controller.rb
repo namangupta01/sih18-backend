@@ -12,7 +12,6 @@ class UserRegistrationController < ApplicationController
 			UserMailer.send_signup_confirmation_mail(token, user).deliver_now
 			return response_data(user,"Signed Up! Please confirm your mail",201)
 		else 
-			byebug
 			return response_data({}, "Something Went wrong", 409, user.errors.full_messages )
 		end
 	end
