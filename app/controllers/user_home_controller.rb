@@ -6,9 +6,22 @@ class UserHomeController < ApplicationController
 	end
 
 	def dams
-		byebug
-		dams = Dam.all
-		response_data(dams,"List of all dams", 200)
+		if params[:page].nil? || params[:state].nil?
+			dams = Dam.all
+			response_data(dams,"List of all dams", 200)
+		else
+			if !params[:page].nil?
+				page = params[:page].to_i
+				per_page_dams = 20
+				offset = per_page_dams * page
+				dams = Dam.offset(offset).limit(20)
+				response_data(dams,"List of dams pagewise", 200)
+			else
+				state = params[:state]
+				dams = Dam.where('lower(state) = lower(?)', state)
+				response_data(dams,"List of dams statewise", 200)
+			end
+		end	
 	end
 
 
