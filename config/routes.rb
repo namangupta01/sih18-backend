@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   # 	}
   post 'user_registration/login'
   post 'admin_registration/login'
-  get 'user_home/index'
-  get 'user_registration/verify_confirmation_mail'
-  get 'user_home/dams'
-  get 'user_home/notifications'
+  post 'user_home/index'
+  post 'user_registration/verify_confirmation_mail'
+  post 'user_home/dams'
+  post 'user_home/notifications'
 end
