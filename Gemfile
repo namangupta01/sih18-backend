@@ -37,6 +37,7 @@ gem 'active_model_serializers', '0.9.3'
 gem 'activeadmin'
 gem 'devise'
 gem "active_material", github: "vigetlabs/active_material"
+gem 'rack-cors', :require => 'rack/cors'
 
 
 group :development, :test do
