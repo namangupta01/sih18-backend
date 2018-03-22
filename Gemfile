@@ -40,6 +40,9 @@ gem "active_material", github: "vigetlabs/active_material"
 gem 'rack-cors', :require => 'rack/cors'
 gem 'http'
 
+# for finding distance between two lat and long points
+gem 'haversine'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
