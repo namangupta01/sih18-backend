@@ -53,7 +53,8 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  
+    
+  config.auth_key = "202312AsTCHKVkdqpo5aa663bc"
 
 ActionMailer::Base.smtp_settings = {
   address:              'smtp.gmail.com',

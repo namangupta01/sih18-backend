@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   post 'user_registration/verify_confirmation_mail'
   post 'user_home/dams'
   post 'user_home/notifications'
+  post 'admin_registration/forgot_password'
 end

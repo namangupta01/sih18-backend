@@ -3,7 +3,7 @@ class CreateDirectories < ActiveRecord::Migration[5.1]
     create_table :directories do |t|
     	t.string :name
     	t.string :phone_number
-    	t.string :dam_id
+    	t.references :dam
       	t.timestamps
     end
   end

@@ -60,4 +60,14 @@ class ApplicationController < ActionController::Base
 		UserSessionToken.where(session_token: params[:session_token]).first.user
 	end
 
+	def current_admin_user
+		AdminSessionToken.where(session_token :params[:admin_session_token]).first.user
+	end
+
+	def send_otp phone_number, message
+		url = "http://api.msg91.com/api/sendhttp.php?sender=BVPTEH&route=4&mobiles=#{phone_number}
+							&authkey=#{Rails.application.config.auth_key}&country=0&message=#{message}"
+		HTTP.get(url)
+	end
+
 end

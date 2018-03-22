@@ -72,5 +72,16 @@ class UserHomeController < ApplicationController
 
 	end
 
+	def sphefic_authority_directory
+		dam_id = params[:dam_id]
+		if Dam.where(id: dam_id).any?
+			dam = Dam.where(id: dam_id).first
+			contacts = dam.directories
+			response_data(dam,"Dam water level updated", 200)
+		else
+			response_data(dam,"Wrong dam ID", 400)
+		end
+	end
+
 
 end
