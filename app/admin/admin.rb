@@ -12,4 +12,5 @@ ActiveAdmin.register Admin do
 #   permitted
 # end
 
+permit_params :name, :password, :email, :phone_number, :dam_id
 end

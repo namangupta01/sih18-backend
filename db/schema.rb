@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(version: 20180308153051) do
     t.string "password"
     t.string "email"
     t.string "phone_number"
-    t.integer "admin_id"
+    t.integer "dam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["admin_id"], name: "index_admins_on_admin_id"
+    t.index ["dam_id"], name: "index_admins_on_dam_id"
   end
 
   create_table "dams", force: :cascade do |t|
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20180308153051) do
   create_table "help_mes", force: :cascade do |t|
     t.string "latitude"
     t.string "longitude"
+    t.string "address"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -113,8 +114,8 @@ ActiveRecord::Schema.define(version: 20180308153051) do
   end
 
   create_table "user_locations", force: :cascade do |t|
-    t.string "latitude"
-    t.string "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
