@@ -1,0 +1,2 @@
+class AdminForgotPassword < ApplicationRecord
+end
