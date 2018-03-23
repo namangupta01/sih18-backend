@@ -27,7 +27,6 @@ class UserHomeController < ApplicationController
 	def update_user_dam_details
 		dam_id = params[:dam_id].to_i
 		dam = Dam.where(id: dam_id).first
-		byebug
 		if dam
 			current_user.dam = dam
 			current_user.save!
