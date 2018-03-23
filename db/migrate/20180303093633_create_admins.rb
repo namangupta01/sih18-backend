@@ -5,7 +5,6 @@ class CreateAdmins < ActiveRecord::Migration[5.1]
     	t.string :password
     	t.string :email
     	t.string :phone_number
-    	t.references :dam
       t.timestamps
     end
   end
