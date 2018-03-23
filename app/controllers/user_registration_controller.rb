@@ -6,6 +6,7 @@ class UserRegistrationController < ApplicationController
 		user.password = params[:password]
 		user.name = params[:name]
 		user.phone_number = params[:phone_number]
+		user.dam_id= params[:dam_id]
 		token = confirmation_token
 		user.confirmation_token = token
 		if user.save

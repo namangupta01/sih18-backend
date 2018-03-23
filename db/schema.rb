@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322130623) do
+ActiveRecord::Schema.define(version: 20180322180627) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -99,19 +99,41 @@ ActiveRecord::Schema.define(version: 20180322130623) do
   create_table "directories", force: :cascade do |t|
     t.string "name"
     t.string "phone_number"
-    t.string "dam_id"
+    t.integer "dam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dam_id"], name: "index_directories_on_dam_id"
   end
 
   create_table "help_mes", force: :cascade do |t|
-    t.string "latitude"
-    t.string "longitude"
+    t.float "latitude"
+    t.float "longitude"
     t.string "address"
     t.integer "user_id"
+    t.integer "dam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dam_id"], name: "index_help_mes_on_dam_id"
     t.index ["user_id"], name: "index_help_mes_on_user_id"
+  end
+
+  create_table "notification_delivereds", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "date_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notification_delivereds_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.integer "notification_type"
+    t.string "author"
+    t.integer "dam_id"
+    t.integer "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dam_id"], name: "index_notifications_on_dam_id"
   end
 
   create_table "user_alert_mappings", force: :cascade do |t|
@@ -147,6 +169,8 @@ ActiveRecord::Schema.define(version: 20180322130623) do
     t.string "confirmation_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "dam_id"
+    t.index ["dam_id"], name: "index_users_on_dam_id"
   end
 
 end
