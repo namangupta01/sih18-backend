@@ -23,21 +23,21 @@ class AdminHomeController < ApplicationController
 
 	def update_dam
 		water_level = params[:water_level]
-		dam = current_admin_user.dam
+		dam = current_admin.dam
 		dam.present_water_level = water_level
 		dam.save!
 		response_data(dam,"Dam water level updated", 200)
 	end
 
 	def help_me_list
-		dam = current_admin_user.dam
+		dam = current_admin.dam
 		data = dam.help_me_list
 		response_data(data,"List of pelp asked", 200)
 	end
 
 
 	def authority_directory
-		dam = current_admin_user.dam
+		dam = current_admin.dam
 		contacts = dam.directories
 		response_data(dam,"Dam water level updated", 200)
 	end
@@ -49,7 +49,7 @@ class AdminHomeController < ApplicationController
 		phone_number = params[:phone_number]
 		if Directory.where(id: directory_id).any?
 			directory = Directory.where(id: directory_id)
-			if current_admin_user.dam == directory.dam
+			if current_admin.dam == directory.dam
 				directory.name = name
 				directory.phone_number = phone_number
 				directory.save!

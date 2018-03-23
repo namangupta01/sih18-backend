@@ -60,7 +60,7 @@ class ApplicationController < ActionController::Base
 		UserSessionToken.where(session_token: params[:session_token]).first.user
 	end
 
-	def current_admin_user
+	def current_admin
 		AdminSessionToken.where(session_token :params[:admin_session_token]).first.user
 	end
 

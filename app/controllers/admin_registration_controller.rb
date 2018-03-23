@@ -1,6 +1,8 @@
 class AdminRegistrationController < ApplicationController
 	before_action :authenticate_admin!, only: [:change_password]
 
+
+
 	def login
 		admin = Admin.where(email: params[:email]).first
 		if admin
@@ -61,8 +63,8 @@ class AdminRegistrationController < ApplicationController
 
 	def change_password
 		password = params[:password]
-		current_admin_user.password = password
-		current_admin_user.save!
+		current_admin.password = password
+		current_admin.save!
 			return response_data({}, "Password Changed", 200)
 		end
 	end
