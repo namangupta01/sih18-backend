@@ -1,5 +1,5 @@
-class Admin < ApplicationRecord
-	has_many :admin_session_tokens
+class DamAdmin < ApplicationRecord
+	has_many :dam_admin_session_tokens
 	belongs_to :dam
 
 	after_create :send_details
@@ -11,5 +11,4 @@ class Admin < ApplicationRecord
 	def send_details
 		AdminMailer.send_admin_details(self, dam).deliver_later
 	end
-
 end
