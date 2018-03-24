@@ -1,5 +1,5 @@
 class UserHomeController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:dams]
 	
 	def index
 		return response_data({},"asdasd",200)
