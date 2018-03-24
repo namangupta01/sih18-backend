@@ -1,0 +1,2 @@
+class DamAdmin < ApplicationRecord
+end

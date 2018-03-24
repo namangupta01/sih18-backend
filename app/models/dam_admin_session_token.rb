@@ -1,0 +1,2 @@
+class DamAdminSessionToken < ApplicationRecord
+end

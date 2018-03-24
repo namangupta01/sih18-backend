@@ -1,0 +1,2 @@
+class DamAdminForgotPassword < ApplicationRecord
+end

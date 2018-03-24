@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180322180627) do
+ActiveRecord::Schema.define(version: 20180324073620) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -24,22 +24,6 @@ ActiveRecord::Schema.define(version: 20180322180627) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
-  end
-
-  create_table "admin_forgot_passwords", force: :cascade do |t|
-    t.string "forgot_password_token"
-    t.integer "admin_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["admin_id"], name: "index_admin_forgot_passwords_on_admin_id"
-  end
-
-  create_table "admin_session_tokens", force: :cascade do |t|
-    t.string "session_token"
-    t.integer "admin_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["admin_id"], name: "index_admin_session_tokens_on_admin_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -59,7 +43,23 @@ ActiveRecord::Schema.define(version: 20180322180627) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
-  create_table "admins", force: :cascade do |t|
+  create_table "dam_admin_forgot_passwords", force: :cascade do |t|
+    t.string "forgot_password_token"
+    t.integer "dam_admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dam_admin_id"], name: "index_dam_admin_forgot_passwords_on_dam_admin_id"
+  end
+
+  create_table "dam_admin_session_tokens", force: :cascade do |t|
+    t.string "session_token"
+    t.integer "dam_admin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dam_admin_id"], name: "index_dam_admin_session_tokens_on_dam_admin_id"
+  end
+
+  create_table "dam_admins", force: :cascade do |t|
     t.string "name"
     t.string "password"
     t.string "email"
@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20180322180627) do
     t.integer "dam_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dam_id"], name: "index_admins_on_dam_id"
+    t.index ["dam_id"], name: "index_dam_admins_on_dam_id"
   end
 
   create_table "dams", force: :cascade do |t|

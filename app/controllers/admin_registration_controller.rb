@@ -4,7 +4,7 @@ class AdminRegistrationController < ApplicationController
 
 
 	def login
-		admin = Admin.where(email: params[:email]).first
+		admin = DamAdmin.where(email: params[:email]).first
 		if admin
 			if admin.password = params[:password]
 				session_token = admin_secure_session_token
@@ -22,12 +22,12 @@ class AdminRegistrationController < ApplicationController
 
 	def forgot_password
 		phone_number = params[:phone_number]
-		if Admin.where(phone_number: phone_number).any?
-			admin = Admin.where(phone_number: phone_number)
+		if DamAdmin.where(phone_number: phone_number).any?
+			admin = DamAdmin.where(phone_number: phone_number)
 			otp = get_otp
 			message = "Your otp for reset password is #{otp}"
-			if AdminForgotPassword.where(admin_id: admin.id).any?
-				admin_forgot_password = AdminForgotPassword.where(admin_id: admin.id).first
+			if DamAdminForgotPassword.where(admin_id: admin.id).any?
+				admin_forgot_password = DamAdminForgotPassword.where(dam_admin_id: admin.id).first
 				admin_forgot_password.forgot_password_token = otp
 				admin_forgot_password.save!
 			else
@@ -47,8 +47,8 @@ class AdminRegistrationController < ApplicationController
 		phone_number = params[:phone_number]
 		otp = params[:otp]
 		password = params[:password]
-		if Admin.where(phone_number: phone_number).any?
-			admin = Admin.where(phone_number: phone_number).first
+		if DamAdmin.where(phone_number: phone_number).any?
+			admin = DamAdmin.where(phone_number: phone_number).first
 			if admin.admin_forgot_password.forgot_password_token == otp
 				admin.password = password
 				admin.save!
@@ -73,7 +73,7 @@ class AdminRegistrationController < ApplicationController
 
 	def get_otp
 		otp = rand(100001..999999)
-		while AdminForgotPassword.where(forgot_password_token: otp).any?
+		while DamAdminForgotPassword.where(forgot_password_token: otp).any?
 			otp = rand(100001..999999)
 		end
 		otp
