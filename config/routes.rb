@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   post 'admin_registration/login'
   post 'user_home/index'
   get 'user_registration/verify_confirmation_mail'
-  post 'user_home/dams'
+  get 'user_home/dams'
   post 'user_home/update_user_dam_details'
   post 'user_home/notifications'
   post 'user_home/all_notifications'
