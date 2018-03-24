@@ -6,7 +6,8 @@ class UserHomeController < ApplicationController
 	end
 
 	def dams
-		if params[:page].nil? || params[:state].nil?
+		byebug
+		if !params[:page].nil? && !params[:state].nil?
 			dams = Dam.all
 			response_data(dams,"List of all dams", 200)
 		else
@@ -83,6 +84,11 @@ class UserHomeController < ApplicationController
 		notification.resource_id = help_me.id
 		notification.save!
 		response_data(help_me, "Asked for help from people around you", 200)
+	end
+
+	def all_notifications
+		notifications = current_user.dam.notifications
+		response_data(notifications, "All dam notifications", 200)
 	end
 
 	private
