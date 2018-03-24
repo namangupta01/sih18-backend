@@ -59,6 +59,11 @@ class UserHomeController < ApplicationController
 		response_data(notifications, "Notification Polling", 200)
 	end
 
+	def all_notifications
+		notifications = current_user.dam.notifications
+		response_data(notifications, "All notifications", 200)
+	end
+
 
 
 	def help_me
