@@ -73,7 +73,6 @@ class UserHomeController < ApplicationController
 		help_me.latitude = latitude
 		help_me.longitude = longitude
 		help_me.dam_id = current_user.dam_id
-		byebug
 		help_me.save!
 		notification = Notification.create
 		notification.message = "Is in danger"
