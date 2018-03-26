@@ -4,6 +4,7 @@ class AdminRegistrationController < ApplicationController
 
 
 	def login
+		byebug
 		admin = DamAdmin.where(email: params[:email]).first
 		if admin
 			if admin.password = params[:password]
@@ -56,6 +57,7 @@ class AdminRegistrationController < ApplicationController
 				return response_data({}, "Password reset successfully", 200)
 			else
 				return response_data({}, "OTP donot match!", 400)
+			end
 		else
 			return response_data({}, "Such phone number donot exists", 401)
 		end
@@ -65,8 +67,7 @@ class AdminRegistrationController < ApplicationController
 		password = params[:password]
 		current_admin.password = password
 		current_admin.save!
-			return response_data({}, "Password Changed", 200)
-		end
+		return response_data({}, "Password Changed", 200)
 	end
 
 	private

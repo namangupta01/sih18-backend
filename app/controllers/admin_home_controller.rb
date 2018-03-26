@@ -1,5 +1,5 @@
 class AdminHomeController < ApplicationController
-	before_action :authenticate_admin!
+	before_action :authenticate_admin!, except: [:dam_water_release_detail, :update_water_release]
 
 	def dams
 		if params[:page].nil? || params[:state].nil?
@@ -18,6 +18,25 @@ class AdminHomeController < ApplicationController
 				response_data(dams,"List of dams statewise", 200)
 			end
 		end	
+	end
+
+
+	def update_water_release
+		datetime = params[:datetime].to_datetime
+		description = params[:description]
+		dam = current_admin.dam
+		dam_water_release = dam.dam_water_release.new
+		dam_water_release.dam_admin = current_admin.id
+		dam_water_release.description = description
+		dam_water_release.water_release_datetime = datetime
+		dam_water_release.save!
+		response_data(dam_water_release,"Water release updated", 200)
+	end
+
+	def dam_water_release_detail
+		dam_id = params[:dam_id].to_i
+		dam_water_release = DamWaterRelease.where(dam_id: dam_id)
+		response_data(dam_water_release,"Water release updated", 200)
 	end
 
 

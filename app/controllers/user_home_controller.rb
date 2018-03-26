@@ -1,8 +1,12 @@
 class UserHomeController < ApplicationController
-	before_action :authenticate_user!, except: [:dams]
+	before_action :authenticate_user!, except: [:dams, :dam_sphefic_directory]
 	
 	def index
 		return response_data({},"asdasd",200)
+	end
+
+	def user_detail
+
 	end
 
 	def dams
@@ -84,6 +88,23 @@ class UserHomeController < ApplicationController
 		response_data(help_me, "Asked for help from people around you", 200)
 	end
 
+	def dam_sphefic_directory
+		dam_id = params[:dam_id]
+		if Dam.where(id: dam_id).any?
+			dam = Dam.where(id: dam_id).first
+			contacts = dam.directories
+			response_data(contacts,"Dam directory", 200)
+		else
+			response_data({},"Wrong dam ID", 400)
+		end
+	end
+
+	def dam_directory
+		dam = current_user.dam
+		contacts = dam.directories
+		response_data(contacts,"Dam directory", 200)
+	end
+
 	private
 
 	def user_alert
@@ -107,17 +128,6 @@ class UserHomeController < ApplicationController
 	def find_distance
 
 
-	end
-
-	def sphefic_authority_directory
-		dam_id = params[:dam_id]
-		if Dam.where(id: dam_id).any?
-			dam = Dam.where(id: dam_id).first
-			contacts = dam.directories
-			response_data(dam,"Dam water level updated", 200)
-		else
-			response_data(dam,"Wrong dam ID", 400)
-		end
 	end
 
 

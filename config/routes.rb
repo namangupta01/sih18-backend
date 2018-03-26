@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   post 'user_home/notifications'
   post 'user_home/all_notifications'
   post 'user_home/help_me'
+  post 'user_home/dam_sphefic_directory'
+  post 'user_home/dam_directory'
+  post 'admin_home/update_water_release'
+  post 'admin_home/dam_water_release_detail'
 
   post 'admin_registration/forgot_password'
 end

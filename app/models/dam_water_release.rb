@@ -1,0 +1,2 @@
+class DamWaterRelease < ApplicationRecord
+end
