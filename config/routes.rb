@@ -32,8 +32,18 @@ Rails.application.routes.draw do
   post 'admin_registration/forgot_password'
 
   get 'admin_home/dams'
+
   post 'admin_home/create_dam_water_release'
-  get 'admin_home/dam_water_release_detail'
+  get  'admin_home/dam_water_release_detail'
+  post 'admin_home/update_water_release'
+
   post 'admin_home/update_water_level_dam'
   get 'admin_home/help_me_list'
+
+  get 'admin_home/authority_directory'
+  post 'admin_home/edit_authority_directory'
+  post 'admin_home/create_authority_directory'
+  post 'admin_home/delete_authority_directory'
+
+  
 end

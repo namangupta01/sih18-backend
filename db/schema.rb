@@ -74,7 +74,7 @@ ActiveRecord::Schema.define(version: 20180326090601) do
     t.integer "dam_id"
     t.integer "dam_admin_id"
     t.string "description"
-    t.datetime "water_release_datetime"
+    t.string "water_release_datetime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dam_admin_id"], name: "index_dam_water_releases_on_dam_admin_id"

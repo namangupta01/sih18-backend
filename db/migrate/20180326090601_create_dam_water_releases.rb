@@ -4,7 +4,7 @@ class CreateDamWaterReleases < ActiveRecord::Migration[5.1]
     	t.references :dam
     	t.references :dam_admin
     	t.string :description
-    	t.datetime :water_release_datetime
+    	t.string :water_release_datetime
       t.timestamps
     end
   end

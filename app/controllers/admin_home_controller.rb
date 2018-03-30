@@ -1,5 +1,5 @@
 class AdminHomeController < ApplicationController
-	before_action :authenticate_admin!, except: [:dam_water_release_detail, :update_water_release, :dams]
+	before_action :authenticate_admin!, except: [:dam_water_release_detail, :dams]
 
 	def dams
 		if params[:page].nil? || params[:state].nil?
@@ -32,11 +32,11 @@ class AdminHomeController < ApplicationController
 	end
 
 	def update_water_release
-		datetime = params[:datetime].to_datetime
+		datetime = params[:datetime_timestamp]
 		description = params[:description]
 		dam = current_admin.dam
-		dam_water_release = dam.dam_water_release.new
-		dam_water_release.dam_admin = current_admin.id
+		dam_water_release = dam.dam_water_releases.new
+		dam_water_release.dam_admin_id = current_admin.id
 		dam_water_release.description = description
 		dam_water_release.water_release_datetime = datetime
 		dam_water_release.save!
@@ -69,7 +69,7 @@ class AdminHomeController < ApplicationController
 	def authority_directory
 		dam = current_admin.dam
 		contacts = dam.directories
-		response_data(dam,"Dam water level updated", 200)
+		response_data(contacts,"Dam water level updated", 200)
 	end
 
 
@@ -78,7 +78,7 @@ class AdminHomeController < ApplicationController
 		name = params[:name]
 		phone_number = params[:phone_number]
 		if Directory.where(id: directory_id).any?
-			directory = Directory.where(id: directory_id)
+			directory = Directory.where(id: directory_id).first
 			if current_admin.dam == directory.dam
 				directory.name = name
 				directory.phone_number = phone_number
@@ -96,7 +96,7 @@ class AdminHomeController < ApplicationController
 	def create_authority_directory
 		name = params[:name]
 		phone_number = params[:phone_number]
-		directory = dam.directory.create
+		directory = current_admin.dam.directories.new
 		directory.name = name
 		directory.phone_number = phone_number
 		directory.save!

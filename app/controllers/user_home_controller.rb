@@ -109,6 +109,33 @@ class UserHomeController < ApplicationController
 		response_data(contacts,"Dam directory", 200)
 	end
 
+	def create_user_personal_directory
+		name = params[:name]
+		description = params[:description]
+		phone_number = params[:phone_number]
+		user_personal_directory = current_user.user_personal_directories.new
+		user_personal_directory.name = name
+		user_personal_directory.description = description
+		user_personal_directory.phone_number = phone_number
+
+
+	end
+
+	def update_user_personal_directory
+
+
+	end
+
+	def edit_user_personal_directory
+
+
+	end
+
+	def user_personal_directory_detail
+
+
+	end
+
 	private
 
 	def user_alert
