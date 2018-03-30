@@ -2,23 +2,26 @@ class UserRegistrationController < ApplicationController
 
 	def sign_up
 		user = User.new
-		user.email = params[:email]
 		user.password = params[:password]
 		user.name = params[:name]
 		user.phone_number = params[:phone_number]
 		user.dam_id= params[:dam_id]
-		token = confirmation_token
-		user.confirmation_token = token
-		if user.save
-			UserMailer.send_signup_confirmation_mail(token, user).deliver_now
-			return response_data(user,"Signed Up! Please confirm your mail",201)
-		else 
-			return response_data({}, "Something Went wrong", 409, user.errors.full_messages )
-		end
+		user.confirmed = true
+		# token = confirmation_token
+		# user.confirmation_token = token
+		# if user.save
+		# 	UserMailer.send_signup_confirmation_mail(token, user).deliver_now
+		# 	return response_data(user,"Signed Up! Please confirm your mail",201)
+		# else 
+		# 	return response_data({}, "Something Went wrong", 409, user.errors.full_messages )
+		# end
+
+		user.save
+		return response_data(user,"Signed Up! ",201)
 	end
 
 	def login
-		user = User.where(email: params[:email]).first
+		user = User.where(phone_number: params[:phone_number]).first
 		if user
 			if  user.confirmed
 				if user.password == params[:password]
