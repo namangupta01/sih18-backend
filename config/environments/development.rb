@@ -54,8 +54,8 @@ Rails.application.configure do
   Rails.application.routes.default_url_options[:host] = 'http://localhost:3000'
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
     
-  config.auth_key = "202312AsTCHKVkdqpo5aa663bc"
-
+  #config.auth_key = "202312AsTCHKVkdqpo5aa663bc"
+  config.auth_key = "206709AvHxdQ2BM5abdc3f1"
 ActionMailer::Base.smtp_settings = {
   address:              'smtp.gmail.com',
   port:                 587,

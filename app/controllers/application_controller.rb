@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
 	def admin_secure_session_token
 		token = SecureRandom.hex
-		while AdminSessionToken.where(session_token: token).any? do 
+		while DamAdminSessionToken.where(session_token: token).any? do 
 			token = SecureRandom.hex
 		end
 		token
@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
 	end
 
 	def authenticate_admin!
-		admin_session_token = params[:session_token]
-		if AdminSessionToken.where(session_token: admin_session_token).any?
+		admin_session_token = params[:admin_session_token]
+		if DamAdminSessionToken.where(session_token: admin_session_token).any?
 			return true
 		else
 			return response_data({}, "Unauthticated! Please, Login Again!", 401)
@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def current_admin
-		AdminSessionToken.where(session_token :params[:admin_session_token]).first.user
+		DamAdminSessionToken.where(session_token: params[:admin_session_token]).first.dam_admin
 	end
 
 	def send_otp phone_number, message

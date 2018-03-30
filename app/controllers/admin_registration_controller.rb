@@ -4,13 +4,14 @@ class AdminRegistrationController < ApplicationController
 
 
 	def login
-		byebug
 		admin = DamAdmin.where(email: params[:email]).first
 		if admin
 			if admin.password = params[:password]
 				session_token = admin_secure_session_token
+				dam_admin_session_token = admin.dam_admin_session_tokens.new(session_token: session_token)
+				dam_admin_session_token.save!
 				data = Hash.new
-				data[:user] = user
+				data[:user] = admin
 				data[:admin_session_token] = session_token
 				return response_data(data, "Login Successful!", 200)
 			else
@@ -24,15 +25,17 @@ class AdminRegistrationController < ApplicationController
 	def forgot_password
 		phone_number = params[:phone_number]
 		if DamAdmin.where(phone_number: phone_number).any?
-			admin = DamAdmin.where(phone_number: phone_number)
+			admin = DamAdmin.where(phone_number: phone_number).first
 			otp = get_otp
 			message = "Your otp for reset password is #{otp}"
-			if DamAdminForgotPassword.where(admin_id: admin.id).any?
+			byebug
+			if DamAdminForgotPassword.where(dam_admin_id: admin.id).any?
 				admin_forgot_password = DamAdminForgotPassword.where(dam_admin_id: admin.id).first
 				admin_forgot_password.forgot_password_token = otp
 				admin_forgot_password.save!
 			else
-				admin_forgot_password = admin.admin_forgot_password.create
+				byebug
+				admin_forgot_password = admin.dam_admin_forgot_password.new
 				admin_forgot_password.forgot_password_token = otp
 				admin_forgot_password.save!
 			end
@@ -64,9 +67,10 @@ class AdminRegistrationController < ApplicationController
 	end
 
 	def change_password
+		dam_admin = current_admin
 		password = params[:password]
-		current_admin.password = password
-		current_admin.save!
+		dam_admin.password = password
+		dam_admin.save!
 		return response_data({}, "Password Changed", 200)
 	end
 

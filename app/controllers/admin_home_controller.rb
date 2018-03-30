@@ -1,5 +1,5 @@
 class AdminHomeController < ApplicationController
-	before_action :authenticate_admin!, except: [:dam_water_release_detail, :update_water_release]
+	before_action :authenticate_admin!, except: [:dam_water_release_detail, :update_water_release, :dams]
 
 	def dams
 		if params[:page].nil? || params[:state].nil?
@@ -20,6 +20,16 @@ class AdminHomeController < ApplicationController
 		end	
 	end
 
+	def create_dam_water_release
+		dam_id = params[:dam_id]
+		admin_id = current_admin.id
+		description = params[:description]
+		datetime = params[:datetime_timestamp]
+		dam_water_release = DamWaterRelease.new(dam_id: dam_id, dam_admin_id: admin_id, description: description, water_release_datetime: datetime)
+		dam_water_release.save!
+		response_data(dam_water_release,"Water release entry created", 200)
+
+	end
 
 	def update_water_release
 		datetime = params[:datetime].to_datetime
@@ -40,7 +50,7 @@ class AdminHomeController < ApplicationController
 	end
 
 
-	def update_dam
+	def update_water_level_dam
 		water_level = params[:water_level]
 		dam = current_admin.dam
 		dam.present_water_level = water_level
@@ -50,7 +60,8 @@ class AdminHomeController < ApplicationController
 
 	def help_me_list
 		dam = current_admin.dam
-		data = dam.help_me_list
+		data = dam.help_mes
+		byebug
 		response_data(data,"List of pelp asked", 200)
 	end
 
@@ -91,5 +102,18 @@ class AdminHomeController < ApplicationController
 		directory.save!
 		response_data(directory,"Another contact in directory created", 200)
 	end
+
+	def delete_authority_directory
+		dam = current_admin.dam.id
+		directory_id = params[:directory_id]
+		if Directory.where(id: directory_id).first
+			Directory.where(id: directory_id).first.destroy!
+			response_data({},"Deleted", 200)
+		else
+			response_data({},"No such directory exist", 200)
+		end	
+
+	end
+
 
 end
