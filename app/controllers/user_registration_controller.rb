@@ -21,7 +21,6 @@ class UserRegistrationController < ApplicationController
 	end
 
 	def login
-		byebug
 		user = User.where(phone_number: params[:phone_number]).first
 		if user
 			if  user.confirmed
