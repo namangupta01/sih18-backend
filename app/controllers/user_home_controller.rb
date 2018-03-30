@@ -41,6 +41,22 @@ class UserHomeController < ApplicationController
 	end
 
 
+	def save_location
+		if !params[:latitude].nil? && !params[:longitude].nil?
+			latitude = params[:latitude].to_f
+			longitude = params[:longitude].to_f
+			location = current_user.user_locations.new
+			location.latitude = latitude
+			location.longitude = longitude
+			location.save!
+			response_data(location, "Location saved", 200)
+		else
+			response_data({}, "Bad request", 400)
+		end
+
+	end
+
+
 	def notifications
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f

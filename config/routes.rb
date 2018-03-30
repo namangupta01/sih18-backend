@@ -46,5 +46,7 @@ Rails.application.routes.draw do
   post 'admin_home/delete_authority_directory'
   get 'admin_home/user_detail'
 
+  post 'user_home/save_location'
+
   
 end

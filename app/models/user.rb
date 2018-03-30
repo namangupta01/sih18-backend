@@ -5,6 +5,6 @@ class User < ApplicationRecord
 	has_one :notification_delivered
 	belongs_to :dam
 	has_many :notification_delivereds
-	# validates :email, uniqueness: { case_sensitive: false }
-	# validates :email, :password, presence: true
+	validates :phone_number, uniqueness: true
+	validates :phone_number, :password, presence: true
 end

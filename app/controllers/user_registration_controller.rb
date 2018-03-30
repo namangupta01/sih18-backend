@@ -16,11 +16,12 @@ class UserRegistrationController < ApplicationController
 		# 	return response_data({}, "Something Went wrong", 409, user.errors.full_messages )
 		# end
 
-		user.save
+		user.save!
 		return response_data(user,"Signed Up! ",201)
 	end
 
 	def login
+		byebug
 		user = User.where(phone_number: params[:phone_number]).first
 		if user
 			if  user.confirmed
