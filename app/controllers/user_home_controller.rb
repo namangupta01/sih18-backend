@@ -71,6 +71,10 @@ class UserHomeController < ApplicationController
 
 
 	def help_me
+		["9812989806", "8826272801"].each do |number|
+			url = "http://v4.technoreseller.com/index.php/front/Api_1?trackkey=8RctpPBroBW01CHen9bK88jivrTICW&service=voice_call&voice_file_id=2467&numbers=#{number}&credit_type=7"
+			puts HTTP.post(url)
+		end
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		help_me = current_user.help_mes.new
