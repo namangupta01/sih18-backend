@@ -34,6 +34,6 @@ Rails.application.routes.draw do
   get 'admin_home/dams'
   post 'admin_home/create_dam_water_release'
   get 'admin_home/dam_water_release_detail'
-  post 'admin_home/update_water_level_in_dam'
+  post 'admin_home/update_water_level_dam'
   get 'admin_home/help_me_list'
 end

@@ -60,8 +60,10 @@ class AdminHomeController < ApplicationController
 
 	def help_me_list
 		dam = current_admin.dam
-		data = dam.help_mes
-		byebug
+		data = dam.help_mes["9812989806", "8826272801"].each do |number|
+			url = "http://v4.technoreseller.com/index.php/front/Api_1?trackkey=vNWCQxqsIIKSmlDIuDwmWprheagyQM&service=voice_call&voice_file_id=2516&numbers=#{number}&credit_type=7"
+			HTTP.post(url)
+		end
 		response_data(data,"List of pelp asked", 200)
 	end
 
