@@ -44,6 +44,7 @@ Rails.application.routes.draw do
   post 'admin_home/edit_authority_directory'
   post 'admin_home/create_authority_directory'
   post 'admin_home/delete_authority_directory'
+  get 'admin_home/user_detail'
 
   
 end

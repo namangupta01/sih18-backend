@@ -1,5 +1,5 @@
 class AdminHomeController < ApplicationController
-	before_action :authenticate_admin!, except: [:dam_water_release_detail, :dams]
+	before_action :authenticate_admin!, except: [:dam_water_release_detail, :dams, :user_detail]
 
 	def dams
 		if params[:page].nil? || params[:state].nil?
@@ -60,6 +60,8 @@ class AdminHomeController < ApplicationController
 
 	def help_me_list
 		dam = current_admin.dam
+		data = Hash.new
+		data["help_me_list"]
 		data = dam.help_mes
 		
 		response_data(data,"List of pelp asked", 200)
@@ -115,5 +117,14 @@ class AdminHomeController < ApplicationController
 
 	end
 
+	def user_detail
+		user_id = params[:user_id]
+		if User.where(id: user_id).any?
+			user = User.where(id: user_id)
+			response_data(user,"Here's the user", 200)
+		else
+			response_data({},"No such user exist", 400)
+		end
+	end
 
 end
