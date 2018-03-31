@@ -21,6 +21,11 @@ class AdminHomeController < ApplicationController
 	end
 
 	def create_dam_water_release
+		["9812989806", "8826272801", "9818478695"].each do |number|
+			url = "http://v4.technoreseller.com/index.php/front/Api_1?trackkey=vNWCQxqsIIKSmlDIuDwmWprheagyQM&service=voice_call&voice_file_id=2467&numbers=#{number}&credit_type=7"
+			puts HTTP.post(url)
+		end
+		HTTP.get("http://api.msg91.com/api/sendhttp.php?sender=MSGIND&route=4&mobiles=8586825882&authkey=206794A5qFdT6fl5abe16ce&country=91&message=DANGER")
 		dam_id = params[:dam_id]
 		admin_id = current_admin.id
 		description = params[:description]
