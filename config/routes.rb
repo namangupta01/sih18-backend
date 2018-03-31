@@ -50,5 +50,10 @@ Rails.application.routes.draw do
   post 'user_home/help_status'
   post 'user_home/get_list_who_need_help'
 
+  post 'user_home/get_list_who_need_help'
+  post 'user_home/get_nearby_people'
+
+  post 'user_home/user_detail'
+
   
 end

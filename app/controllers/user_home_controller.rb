@@ -9,6 +9,16 @@ class UserHomeController < ApplicationController
 
 	end
 
+	def user_detail
+		user_id = params[:user_id]
+		if User.where(id: user_id).any?
+			user = User.where(id: user_id)
+			response_data(user,"Here's the user", 200)
+		else
+			response_data({},"No such user exist", 400)
+		end
+	end
+
 	def dams
 		if params[:page].nil? || params[:state].nil?
 			dams = Dam.all
@@ -140,6 +150,25 @@ class UserHomeController < ApplicationController
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		users = User.where(help: true)
+		user_array = []
+		users.each do |user|
+			user_location = user.user_locations.last
+			distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
+			if distance < 500
+				data = Hash.new
+				data["user"] = user
+				data["latitude"] = user_location.latitude
+				data["longitude"] = user_location.longitude
+				user_array << data
+			end
+		end
+		response_data(user_array, "List given", 200)
+	end
+
+	def get_nearby_people
+		latitude = params[:latitude].to_f
+		longitude = params[:longitude].to_f
+		users = User.where(help: false)
 		user_array = []
 		users.each do |user|
 			user_location = user.user_locations.last
