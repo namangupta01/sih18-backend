@@ -59,5 +59,7 @@ Rails.application.routes.draw do
   post 'admin_home/get_list_who_need_help'
   post 'admin_home/get_nearby_people'
 
+  post 'user_home/bind_help'
+
   
 end

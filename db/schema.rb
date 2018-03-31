@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180331073137) do
+ActiveRecord::Schema.define(version: 20180331085125) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -150,6 +150,13 @@ ActiveRecord::Schema.define(version: 20180331073137) do
   create_table "user_alert_mappings", force: :cascade do |t|
     t.integer "help"
     t.integer "helper"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_helping_mappings", force: :cascade do |t|
+    t.integer "helper"
+    t.integer "whom_want_help"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
