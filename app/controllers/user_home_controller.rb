@@ -102,7 +102,7 @@ class UserHomeController < ApplicationController
 			url = "http://v4.technoreseller.com/index.php/front/Api_1?trackkey=vNWCQxqsIIKSmlDIuDwmWprheagyQM&service=voice_call&voice_file_id=2467&numbers=#{number}&credit_type=7"
 			puts HTTP.post(url)
 		end
-		HTTP.get("http://api.msg91.com/api/sendhttp.php?sender=MSGIND&route=4&mobiles=8586825882&authkey=206794A5qFdT6fl5abe16ce&country=91&message=7827")
+		HTTP.get("http://api.msg91.com/api/sendhttp.php?sender=MSGIND&route=4&mobiles=8586825882&authkey=206794A5qFdT6fl5abe16ce&country=91&message=DANGER")
 		help_me = current_user.help_mes.new
 		help_me.latitude = latitude
 		help_me.longitude = longitude
