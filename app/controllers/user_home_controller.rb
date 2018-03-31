@@ -150,7 +150,7 @@ class UserHomeController < ApplicationController
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		users = User.where(help: true)
-		users = users - current_user
+		users = users.to_a - current_user
 		user_array = []
 		users.each do |user|
 			user_location = user.user_locations.last
@@ -170,7 +170,7 @@ class UserHomeController < ApplicationController
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		users = User.where(help: false)
-		users = users - current_user
+		users = users.to_a - current_user
 		user_array = []
 		users.each do |user|
 			user_location = user.user_locations.last
