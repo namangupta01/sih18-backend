@@ -95,6 +95,16 @@ class UserHomeController < ApplicationController
 	end
 
 
+	def bind_help
+		user_id = params[:user_id]
+		user_helping_map = UserHelpingMap.new
+		user_helping_map.helper = user_id
+		user_helping_map.whom_want_help = current_user.id 
+		response_data(user_helping_map, "User bind", 200)
+	end
+
+
+
 
 	def help_me
 		latitude = params[:latitude].to_f
@@ -163,6 +173,11 @@ class UserHomeController < ApplicationController
 					data["user"] = user
 					data["latitude"] = user_location.latitude
 					data["longitude"] = user_location.longitude
+					if UserHelpingMap.where(helper: current_user.id).any?
+						data["user_id"] = UserHelpingMap.where(helper: current_user.id).first.whom_want_help
+					else
+						data["user_id"] = nil
+					end
 					user_array << data
 				end
 			end
@@ -187,6 +202,11 @@ class UserHomeController < ApplicationController
 					data["user"] = user
 					data["latitude"] = user_location.latitude
 					data["longitude"] = user_location.longitude
+					if UserHelpingMap.where(whom_want_help: current_user.id).any?
+						data["user_id"] = UserHelpingMap.where(whom_want_help: current_user.id).first.helper
+					else
+						data["user_id"] = nil
+					end
 					user_array << data
 				end
 			end

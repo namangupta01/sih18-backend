@@ -1,0 +1,2 @@
+class UserHelpingMapping < ApplicationRecord
+end
