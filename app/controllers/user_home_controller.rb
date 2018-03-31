@@ -152,7 +152,9 @@ class UserHomeController < ApplicationController
 		users = User.where(help: true)
 		user_array = []
 		if users.any?
-			users = users - current_user
+			if users.include? current_user
+				users = users - current_user
+			end
 			users.each do |user|
 				user_location = user.user_locations.last
 				distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
@@ -172,9 +174,11 @@ class UserHomeController < ApplicationController
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		users = User.where(help: false)
-		users = users - current_user
 		user_array = []
 		if users.any?
+			if users.include? current_user
+				users = users - current_user
+			end
 			users.each do |user|
 				user_location = user.user_locations.last
 				distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
