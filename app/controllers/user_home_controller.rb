@@ -150,17 +150,19 @@ class UserHomeController < ApplicationController
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		users = User.where(help: true)
-		users = users.to_a - current_user
 		user_array = []
-		users.each do |user|
-			user_location = user.user_locations.last
-			distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
-			if distance < 500
-				data = Hash.new
-				data["user"] = user
-				data["latitude"] = user_location.latitude
-				data["longitude"] = user_location.longitude
-				user_array << data
+		if users.any?
+			users = users - current_user
+			users.each do |user|
+				user_location = user.user_locations.last
+				distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
+				if distance < 500
+					data = Hash.new
+					data["user"] = user
+					data["latitude"] = user_location.latitude
+					data["longitude"] = user_location.longitude
+					user_array << data
+				end
 			end
 		end
 		response_data(user_array, "List given", 200)
@@ -170,17 +172,19 @@ class UserHomeController < ApplicationController
 		latitude = params[:latitude].to_f
 		longitude = params[:longitude].to_f
 		users = User.where(help: false)
-		users = users.to_a - current_user
+		users = users - current_user
 		user_array = []
-		users.each do |user|
-			user_location = user.user_locations.last
-			distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
-			if distance < 500
-				data = Hash.new
-				data["user"] = user
-				data["latitude"] = user_location.latitude
-				data["longitude"] = user_location.longitude
-				user_array << data
+		if users.any?
+			users.each do |user|
+				user_location = user.user_locations.last
+				distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
+				if distance < 500
+					data = Hash.new
+					data["user"] = user
+					data["latitude"] = user_location.latitude
+					data["longitude"] = user_location.longitude
+					user_array << data
+				end
 			end
 		end
 		response_data(user_array, "List given", 200)
