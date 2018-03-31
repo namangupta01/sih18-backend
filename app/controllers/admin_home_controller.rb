@@ -72,6 +72,44 @@ class AdminHomeController < ApplicationController
 		response_data(data,"List of pelp asked", 200)
 	end
 
+	def get_list_who_need_help
+		latitude = params[:latitude].to_f
+		longitude = params[:longitude].to_f
+		users = User.where(help: true)
+		user_array = []
+		users.each do |user|
+			user_location = user.user_locations.last
+			distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
+			if distance < 500
+				data = Hash.new
+				data["user"] = user
+				data["latitude"] = user_location.latitude
+				data["longitude"] = user_location.longitude
+				user_array << data
+			end
+		end
+		response_data(user_array, "List given", 200)
+	end
+
+	def get_nearby_people
+		latitude = params[:latitude].to_f
+		longitude = params[:longitude].to_f
+		users = User.where(help: false)
+		user_array = []
+		users.each do |user|
+			user_location = user.user_locations.last
+			distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
+			if distance < 500
+				data = Hash.new
+				data["user"] = user
+				data["latitude"] = user_location.latitude
+				data["longitude"] = user_location.longitude
+				user_array << data
+			end
+		end
+		response_data(user_array, "List given", 200)
+	end
+
 
 	def authority_directory
 		dam = current_admin.dam
