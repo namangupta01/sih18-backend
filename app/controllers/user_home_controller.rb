@@ -173,7 +173,7 @@ class UserHomeController < ApplicationController
 					data["user"] = user
 					data["latitude"] = user_location.latitude
 					data["longitude"] = user_location.longitude
-					if UserHelpingMap.where(helper: current_user.id).any?
+					if UserHelpingMapping.where(helper: current_user.id).any?
 						data["user_id"] = UserHelpingMapping.where(helper: current_user.id).first.whom_want_help
 					else
 						data["user_id"] = nil
@@ -202,7 +202,7 @@ class UserHomeController < ApplicationController
 					data["user"] = user
 					data["latitude"] = user_location.latitude
 					data["longitude"] = user_location.longitude
-					if UserHelpingMap.where(whom_want_help: current_user.id).any?
+					if UserHelpingMapping.where(whom_want_help: current_user.id).any?
 						data["user_id"] = UserHelpingMapping.where(whom_want_help: current_user.id).first.helper
 					else
 						data["user_id"] = nil
