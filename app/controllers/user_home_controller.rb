@@ -87,12 +87,22 @@ class UserHomeController < ApplicationController
 
 
 	def help_me
+		latitude = params[:latitude].to_f
+		longitude = params[:longitude].to_f
+		user = current_user
+		user.help = true
+		user.save!
+		users = get_users
+		location = current_user.user_locations.new
+		location.latitude = latitude
+		location.longitude = longitude
+		location.save!
+
 		["9812989806", "8826272801"].each do |number|
 			url = "http://v4.technoreseller.com/index.php/front/Api_1?trackkey=vNWCQxqsIIKSmlDIuDwmWprheagyQM&service=voice_call&voice_file_id=2467&numbers=#{number}&credit_type=7"
 			puts HTTP.post(url)
 		end
-		latitude = params[:latitude].to_f
-		longitude = params[:longitude].to_f
+		HTTP.get("http://api.msg91.com/api/sendhttp.php?sender=MSGIND&route=4&mobiles=8586825882&authkey=206794A5qFdT6fl5abe16ce&country=91&message=7827")
 		help_me = current_user.help_mes.new
 		help_me.latitude = latitude
 		help_me.longitude = longitude
@@ -125,6 +135,26 @@ class UserHomeController < ApplicationController
 		response_data(contacts,"Dam directory", 200)
 	end
 
+
+	def get_list_who_need_help
+		latitude = params[:latitude].to_f
+		longitude = params[:longitude].to_f
+		users = User.where(help: true)
+		user_array = []
+		users.each do |user|
+			user_location = user.user_locations.last
+			distance = Haversine.distance(latitude, longitude, user_location.latitude, user_location.longitude).to_m
+			if distance < 500
+				data = Hash.new
+				data["user"] = user
+				data["latitude"] = user_location.latitude
+				data["longitude"] = user_location.longitude
+				user_array << data
+			end
+		end
+		response_data(user_array, "List given", 200)
+	end
+
 	def create_user_personal_directory
 		name = params[:name]
 		description = params[:description]
@@ -152,7 +182,19 @@ class UserHomeController < ApplicationController
 
 	end
 
+
+	def help_status
+		status = current_user.help
+		response_data(status,"help status", 200)
+	end
+
 	private
+
+	def get_users
+
+
+
+	end
 
 	def user_alert
 		past_minutes_help 30

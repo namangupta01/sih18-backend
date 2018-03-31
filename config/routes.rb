@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   get 'admin_home/user_detail'
 
   post 'user_home/save_location'
+  post 'user_home/help_status'
+  post 'user_home/get_list_who_need_help'
 
   
 end
