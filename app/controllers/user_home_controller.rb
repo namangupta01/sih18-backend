@@ -100,6 +100,8 @@ class UserHomeController < ApplicationController
 		user_helping_map = UserHelpingMapping.new
 		user_helping_map.helper = user_id
 		user_helping_map.whom_want_help = current_user.id 
+		user_helping_map.save!
+		
 		response_data(user_helping_map, "User bind", 200)
 	end
 
