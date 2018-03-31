@@ -98,7 +98,7 @@ class UserHomeController < ApplicationController
 		location.longitude = longitude
 		location.save!
 
-		["9812989806", "8826272801"].each do |number|
+		["9812989806", "8826272801", "9818478695"].each do |number|
 			url = "http://v4.technoreseller.com/index.php/front/Api_1?trackkey=vNWCQxqsIIKSmlDIuDwmWprheagyQM&service=voice_call&voice_file_id=2467&numbers=#{number}&credit_type=7"
 			puts HTTP.post(url)
 		end
